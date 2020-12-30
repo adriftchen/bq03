@@ -1,28 +1,44 @@
 <div class="rb tab" style="width:98%">
   <h3 class="ct" style="margin:0">預告片清單</h3>
-  <div style="100%;display:flex" class="ct">
-    <div stylt="width:25%;margin:0 1px;background:#999">預告片海報</div>
-    <div stylt="width:25%;margin:0 1px;background:#999">預告片片名</div>
-    <div stylt="width:25%;margin:0 1px;background:#999">預告片排序</div>
-    <div stylt="width:25%;margin:0 1px;background:#999">操作</div>
+  <div style="width:100%;display:flex" class="ct">
+    <div style="width:25%;margin:0 1px;background:#999">預告片海報</div>
+    <div style="width:25%;margin:0 1px;background:#999">預告片片名</div>
+    <div style="width:25%;margin:0 1px;background:#999">預告片排序</div>
+    <div style="width:25%;margin:0 1px;background:#999">操作</div>
   </div>
+  <form action="api/edit_poster.php" method="post">
   <div style="width:100%;height:200px;overflow-y:scroll;color:black">
     <?php
-$posters=$Poster->all();
-foreach($posters as $poster){
+$posters=$Poster->all(" order by rank"); /* ""字串前要空一格，sql語法 */
+foreach($posters as $key=>$poster){
     ?>
     <div style="100%;display:flex;align-items:center;background:white;margin:1px 0;" class="ct">
-    <div stylt="width:25%;margin:0 1px;">
+    <div style="width:25%;margin:0 1px;">
         <img src="img/<?=$poster['img'];?>" style="width:80px">
     </div>
-    <div stylt="width:25%;margin:0 1px;">
-        <input type="text" name="name" value="<?=$poster['name'];?>">
+    <div style="width:25%;margin:0 1px;">
+        <input type="text" name="name[]" value="<?=$poster['name'];?>">
     </div>
-    <div stylt="width:25%;margin:0 1px;">
-        <input type="button" value="往上">
-        <input type="button" value="往下">
+    <div style="width:25%;margin:0 1px;">
+    <?php
+        if($key!=0){
+        ?>
+        <input type="button" value="往上" onclick="sw(<?=$poster['id'];?>,<?=$posters[$key-1]['id'];?>)"> 
+        <!-- 原來這筆，要交換的那一筆(是原來陣列 $posters 資料表裡的id) -->
+    <?php
+    }
+    ?>
+
+    <?php
+        if($key!=(count($posters)-1)){
+    ?>
+        <input type="button" value="往下" onclick="sw(<?=$poster['id'];?>,<?=$posters[$key+1]['id'];?>)">
+    <?php
+    }
+    ?>
+
     </div>
-    <div stylt="width:25%;margin:0 1px;">
+    <div style="width:25%;margin:0 1px;">
         <input type="checkbox" name="sh[]" value="<?=$poster['id'];?>" <?=($poster['sh']==1)?'checked':'';?>>顯示
         <input type="checkbox" name="del[]" value="<?=$poster['id'];?>">刪除
         <select name="ani[]" id="">
@@ -30,17 +46,18 @@ foreach($posters as $poster){
             <option value="2" <?=($poster['ani']==2)?"selected":'';?>>滑入滑出</option>
             <option value="3" <?=($poster['ani']==3)?"selected":'';?>>縮放</option>
         </select>
+        <input type="hidden" name="id[]" value="<?=$poster['id'];?>">
     </div>
   </div>
  <?php   
 }
 
 ?>
-
   </div>
   <div class="ct">
     <input type="submit" value="編輯確定"><input type="reset" value="重置">
   </div>
+</form>
   <hr>
   <h3 class="ct" style="margin:0">新增預告片海報</h3>
   <form action="api/add_poster.php" method="post" enctype="multipart/form-data">
@@ -59,3 +76,13 @@ foreach($posters as $poster){
     </div>
   </form>
 </div>
+<script>
+function sw(idx,idy){
+    $.post('api/sw.php',{table:'poster',idx,idy},function(){
+        // console.log(res,idx,idy) 
+        //檢查交換順序沒有成功，先給funciton(res)及console.log(res,idx,idy)、reload關掉
+        //F12-console.log 檢查、db有無存成功
+        location.reload()
+    })
+}
+</script>
