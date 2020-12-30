@@ -21,6 +21,17 @@
     </marquee>
   </div>
   <div id="mm">
+    <!-- 自index.php複製過來 -->
+    <?php
+  $do=(isset($_GET['do']))??'main'; /* 三元運算 判斷式為isset時，第二個$_GET['do']可簡化為? */
+  $file='back/'.$do.".php";
+  if(file_exists($file)){
+    include $file;
+  }else{
+    include "back/main.php";
+  }
+// include (file_exists($file))?file:"front/main.php"; 同上
+  ?>
     <div class="ct a rb" style="position:relative; width:101.5%; left:-1%; padding:3px; top:-9px;"> <a href="?do=admin&redo=tit">網站標題管理</a>| <a href="?do=admin&redo=go">動態文字管理</a>| <a href="?do=admin&redo=rr">預告片海報管理</a>| <a href="?do=admin&redo=vv">院線片管理</a>| <a href="?do=admin&redo=order">電影訂票管理</a> </div>
     <div class="rb tab">
       <h2 class="ct">請選擇所需功能</h2>
