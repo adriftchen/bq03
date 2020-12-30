@@ -2,6 +2,8 @@
 date_default_timezone_set("Asia/Taipei");
 session_start();
 
+$Poster=new DB('poster');
+
 class DB{
     protected $dsn="mysql:host=localhost;dbname=db11;charset=utf8";
     protected $table="";

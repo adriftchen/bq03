@@ -9,7 +9,7 @@ if(!empty($_FILES['poster']['tmp_name'])){
   $data['name']=$_POST['name'];
   $data['sh']=1;
   $data['rank']=$Poster->q("select max(rank) from poster")[0][0]+1;
-  $data['ani']=rank(1,3);
+  $data['ani']=rand(1,3);
   $Poster->save($data);
   
 }
