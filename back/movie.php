@@ -21,8 +21,9 @@
             <div style="width:33%">上映時間:<?=$movie['year'];?>-<?=$movie['month'];?>-<?=$movie['day'];?></div>
         </div>
         <div style="text-align:right">
+
             <button onclick="javascript:location.href='backend.php?do=edit_movie&id=<?=$movie['id'];?>'">編輯電影</button>
-            <button>刪除電影</button>
+            <button onclick="del('movie',<?=$movie['id'];?>)">刪除電影</button>
 
         </div>
         <div><?=$movie['intro'];?></div>
@@ -38,6 +39,12 @@
 <script>
 function sw(idx,idy){
     $.post('api/sw.php',{table:'poster',idx,idy},function(){
+        location.reload()
+    })
+}
+
+function del(table,id){
+    $.post('api/del.php',{table,id},function(){
         location.reload()
     })
 }
