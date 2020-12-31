@@ -1,5 +1,5 @@
 <h3 class="ct" style="margin:0">新增院線片</h3>  <!-- back/poster.php複製 改新增院線片 -->
-<form aciton="api/add_movie.php" method="post" enctype="multipart/form-data">
+<form action="api/add_movie.php" method="post" enctype="multipart/form-data">
   <table style="width:100%">
     <tr>
       <td width="20%">影片資料</td>
