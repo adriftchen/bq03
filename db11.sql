@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2020-12-31 03:06:54
+-- 產生時間： 2020-12-31 09:06:39
 -- 伺服器版本： 10.4.14-MariaDB
 -- PHP 版本： 7.4.10
 
@@ -35,6 +35,7 @@ CREATE TABLE `movie` (
   `year` int(4) UNSIGNED NOT NULL,
   `month` tinyint(2) UNSIGNED NOT NULL,
   `day` tinyint(2) UNSIGNED NOT NULL,
+  `ondate` date NOT NULL,
   `publish` text NOT NULL,
   `director` text NOT NULL,
   `trailer` text NOT NULL,
