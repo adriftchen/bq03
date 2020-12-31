@@ -31,7 +31,7 @@
     <div id="mm">
       <!-- #24-#45剪下，建立front/main.php， -->
       <?php
-  $do=(isset($_GET['do']))??'main'; /* 三元運算 判斷式為isset時，第二個$_GET['do']可簡化為? */
+  $do=isset($_GET['do'])?$_GET['do']:'main';
   $file='front/'.$do.".php";
   if(file_exists($file)){
     include $file;
