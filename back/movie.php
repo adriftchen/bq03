@@ -1,3 +1,17 @@
+<!-- 從back/poster.php複製貼上，刪除第一個div內所有東西 -->
 <div class="rb tab" style="width:98%">
-    <h2 class="ct">院線片</h2>
+<button>新增電影</button>
+<hr>
+<div style="max-height:450px;overflow-y:auto">
+
+
 </div>
+
+</div>
+<script>
+function sw(idx,idy){
+    $.post('api/sw.php',{table:'poster',idx,idy},function(){
+        location.reload()
+    })
+}
+</script>
