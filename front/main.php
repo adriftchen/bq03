@@ -20,6 +20,41 @@
   width:100%;
 
 }
+.buttons{
+  display:flex;
+  width:400px;
+justify-content:center;
+align-items:center;
+margin:auto;
+}
+.list{
+  display:flex;
+  width:320px;
+  overflow:hidden;
+}
+.buttons .btn{
+  width:80px;
+  height:100px;
+  text-align:center;
+  flex-shrink:0;
+}
+.btn img{
+  width:70px;
+
+}
+
+.arrow{
+  width:0;
+  height:0;
+  border-top:20px solid transparent;
+  border-bottom:20px solid transparent;
+}
+.arrow.left{
+  border-right:20px solid green;
+}
+.arrow.right{
+  border-left:20px solid green;
+}
 </style>
 <div class="half" style="vertical-align:top;">
       <h1>預告片介紹</h1>
@@ -38,10 +73,24 @@
       ?>
 
       </div>
-      <div class="buttons"></div>
+      <div class="buttons">
+      <div class="arrow left"></div>
+      <div class="list">
+      <?php
+
+        foreach($posters as $key => $poster){
+          echo "<div class='btn' id='b{$key}' data-ani='{$poster['ani']}'>";
+          echo "<img src='img/{$poster['img']}'>";
+          echo "<span style='display:block'>{$poster['name']}</span>";
+          echo "</div>";
+        }
+
+      ?>
+    </div>
+      <div class="arrow right"></div></div>
       </div>
     </div>
-    
+
     <script>
         $(".po").hide();
         $("#p0").show();
@@ -49,12 +98,17 @@
         let t=setInterval('ani()', 2500);
 
         function ani(){
+          //取得目前正在顯示中的海報
           let now=$(".po:visible")
+          //取得目前正在顯示中的海報的轉場效果
           let ani=$(now).data('ani');
+          //取得目前正在顯示中的海報的下一張海報
           let next
+          //判斷目前正在顯示中的海報是否有下一張海報
           if($(now).next().length){  
             next=$(now).next()
           }else{
+            //如果沒有下一張海報,則取得第一張海報
             next=$("#p0")
           }
           console.log(typeof(ani))
@@ -67,6 +121,7 @@
             break;
             case 2:
             //滑入滑出
+            //利用call back函式在滑出動作完成後才進行滑入的動畫
               $(now).slideUp(1000,function(){
                 $(next).slideDown(1000)
               })
