@@ -1,5 +1,5 @@
+<div class="order"> <!-- 新增div把form包起來 -->
 <h4 class="ct">線上訂票</h4>
-<div class="order"></div> <!-- 新增div把form包起來 -->
 <form>
   <table style="width:400px;margin:auto">
     <tr>
