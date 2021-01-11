@@ -8,7 +8,7 @@ $data['seats']=serialize($_POST['seats']); /* 先將陣列排序 再轉成文字
 $data['qt']=count($_POST['seats']);
 $data['session']=$sess[$_POST['session']]; /* 注意外面是[] */
 $z=$Orders->q('select max(`id`) from `orders`')[0][0]+1;
-$data['num']=date("Ymd").sprintf("`%04d`",$z); //四碼流水號，前面補0
+$data['num']=date("Ymd").sprintf("%04d",$z); //
 
 $Orders->save($data);
 echo $data['num'];
