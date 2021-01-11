@@ -7,7 +7,7 @@
     </tr>
     <tr>
       <td>日期:</td>
-      <td><select name="date" id="date" style="width:98%"></select></td>
+      <td><select name="date" id="date" style="width:98%" onchange="getSessions()"></select></td>
     </tr>
     <tr>
       <td>場次:</td>
@@ -60,6 +60,15 @@ getMovies(<?=$_GET['id']??'';?>);
     //把id丟到後台計算可訂票的日期 (從院線片清單進入)
     $.get("api/get_days.php",{movie},function(days){
       $("#date").html(days)
+      getSessions()
+    })
+  }
+
+  function getSessions(){
+    let movie=$("#movie").val()
+    let date=$("#date").val()
+    $.get("api/get_sessions.php",{movie,date},function(sessions){
+      $("#session").html(sessions)
     })
   }
 </script>
