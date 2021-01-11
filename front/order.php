@@ -3,7 +3,7 @@
   <table style="width:400px;margin:auto">
     <tr>
       <td width=15%>電影:</td>
-      <td><select name="movie" id="movie" style="width:98%"></select></td>
+      <td><select name="movie" id="movie" style="width:98%" onchange="getDays()"></select></td>
     </tr>
     <tr>
       <td>日期:</td>
@@ -39,7 +39,7 @@ if(query.id==undefined){
 //isset($_GETp['id'])?$_GET['id']:''; 三元運算 同下簡寫
 getMovies(<?=$_GET['id']??'';?>);
 
-
+// $("#movie").on("change",()=>{getDates()})  jQ
   function getMovies(id){
     let movie;
     if(id!=undefined){
@@ -50,6 +50,16 @@ getMovies(<?=$_GET['id']??'';?>);
     console.log(movie)
     $.get("api/get_movies.php",{movie},function(movies){
       $("#movie").html(movies)
+      getDays()  //加這行從首頁欄位列的線上訂票進入，日期也會連動
+    })
+  }
+
+  function getDays(){
+    let movie=$("#movie").val() //拿到現在頁面選定的電影id
+
+    //把id丟到後台計算可訂票的日期 (從院線片清單進入)
+    $.get("api/get_days.php",{movie},function(days){
+      $("#date").html(days)
     })
   }
 </script>
