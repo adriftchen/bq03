@@ -12,7 +12,7 @@ foreach($movies as $movie){
   echo "<option value='{$movie['id']}'>{$movie['name']}</option>";
 }else{
   $selected=($type==$movie['id'])?"selected":"";
-  echo "<option value='{$movie['id']}' selected>{$movie['name']}</option>";
+  echo "<option value='{$movie['id']}' $selected>{$movie['name']}</option>";
   }
 }
 ?>
