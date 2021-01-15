@@ -250,6 +250,8 @@ margin:auto;
               <?php
             }
       ?>
+      
+    </div>
         <div class="ct">
         <?php
           if(($now-1)>0){
@@ -268,5 +270,3 @@ margin:auto;
         }
         ?>
          </div>
-      </div>
-    </div>
